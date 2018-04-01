@@ -1,0 +1,239 @@
+* {
+	padding: 0; margin: 0; font-family: 'Montserrat', sans-serif;
+}
+html, body {
+	height: 100%;
+}
+input {
+	line-height: 16px;
+	font-size: 1rem;
+}
+
+/* CABECERA */
+header {
+	position: relative;
+	height: 120px;
+	box-shadow: 0 2px 6px 0px #8D8881;
+}
+	.nc-logo {
+		position: absolute;
+		background-image: url("../img/logo.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		top: 50%;
+		left: 90px;
+		width: 325px;
+		height: 50px;
+		transform: translateY(-50%);
+	}
+	
+	.nc-right-menu {
+		position: absolute;
+		top: 50%;
+		right: 90px;
+		transform: translateY(-50%);
+	}
+		.search-form {
+			display: inline-block;
+		}
+			.input-container {
+				display: inline-block;
+				vertical-align: middle;
+				border: solid 1px #707070;
+				border-radius: 50px;
+				overflow: auto;
+				margin-right: 100px;
+				color: #707070
+			}
+				.input-container > i {
+					vertical-align: middle;
+					margin-left: 5px;
+				}
+				.input-container > input {
+					border: none;
+					height: 34px;
+					vertical-align: middle;
+				}
+				.input-container > input:focus {
+					outline: none;
+				}
+
+/* HOME */
+.home-landing {
+	background-image: url("../img/bg.png");
+    background-size: contain;
+	background-repeat: repeat-y;
+	width: 100%;
+    height: calc(100% - 120px);
+}
+	.hl-info {
+		position: relative;
+		display: inline-block;
+		width: 63%;
+		height: 100%;
+		text-align: center
+	}
+		.hl-title {
+			margin-top: 32px;
+			font-size: 3.5rem;
+			font-weight: 300;
+			color: white;
+		}
+		.hl-info > img{
+			position: absolute;
+			bottom: 0;
+			transform: translateX(-50%)
+		}
+	.hl-form {
+		position: relative;
+		display: inline-block;
+		width: 36%;
+		height: 100%;
+		vertical-align: top
+	}
+		.registro-form {
+			position: absolute;
+			display: inline-block;
+			width: 50%;
+			padding: 45px 41px 45px 25px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			box-shadow: 0 0 10px 0 #8D8881,-77px -77px 20px -75px black, 77px 77px 20px -75px #F15A24;
+		}
+			.registro-form > input, .login-form > input {
+				display: block;
+				margin-bottom: 35px;
+				width: 100%;
+				height: 34px;
+				border: solid 1px #F15A24;
+				padding-left: 16px
+			}
+
+/* MODAL */
+.login-modal {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	top: 0;
+	background: rgba(0,0,0,0.8);
+	width: 100%;
+    height: 100%;
+}
+	.login-form {
+		position: absolute;
+		display: inline-block;
+		width: 20%;
+		padding: 55px 41px 45px 25px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		background-color: white;
+	}
+		.login-form > div {
+			margin-top: 16px;
+			font-size: 0.8rem;
+			font-weight: 300;
+			color: #707070;
+			cursor: pointer;
+		}
+		.login-form > div:hover {
+			text-decoration: underline;
+		}
+		.icon-clear {
+			position: absolute;
+			top: 8px;
+			right: 16px;
+			color: #707070;
+			cursor: pointer
+		}
+
+/* BOTONES GENÉRICOS */
+.btn {
+	border-radius: 10px;
+	padding: 8px 15px;
+	line-height: 16px;
+	font-size: 1rem;
+	cursor: pointer;
+}
+	.btn-nc {
+		border: solid 1px #F15A24;
+		background-color: #F15A24;
+		color: white;
+	}
+	.btn-rvs {
+		border: solid 1px #F15A24;
+		background-color: transparent;
+		color: #F15A24
+	}
+	.btn-rvs:hover {
+		border: solid 1px #F15A24;
+		background-color: #F15A24;
+		color: white;
+	}
+
+/* DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.icon-menu {
+	font-size: 3rem;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+	transform: translateX(-100%);
+	left: 100%;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #707070}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .icon-menu {
+    background-color: #3e8e41;
+}
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+	.hl-info > img {
+		width: 320px;
+		height: auto;
+		transition: width 1s;
+	}
+	.hl-title {
+		font-size: 2.5rem;
+	}
+	.registro-form {
+		min-width: 185px;		
+	}
+	.nc-logo {
+		width: 250px;
+		height: 39px;
+	}
+}
+@media (min-width: 768px) and (orientation: portrait) {
+	.nc-logo {
+		background-image: url("../img/iso.png");
+		width: 50px;
+		height: 50px;
+	}
+}
