@@ -60,11 +60,13 @@ header {
 
 /* HOME */
 .home-landing {
+	position: relative;
 	background-image: url("../img/bg.png");
     background-size: contain;
 	background-repeat: repeat-y;
 	width: 100%;
     height: calc(100% - 120px);
+	z-index: -1;
 }
 	.hl-info {
 		position: relative;
@@ -189,10 +191,9 @@ header {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-	transform: translateX(-100%);
-	left: 100%;
+	right: 0;
 }
-/* Links inside the dropdown */
+/* Enlaces en dropdown */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -200,17 +201,17 @@ header {
     display: block;
 }
 
-/* Change color of dropdown links on hover */
+/* Cambiar color a enlaces en hover */
 .dropdown-content a:hover {background-color: #707070}
 
-/* Show the dropdown menu on hover */
+/* Mostrar menu dropdown en hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
+/* Cambiar color del boton mientras el menu se muestra */
 .dropdown:hover .icon-menu {
-    background-color: #3e8e41;
+    background-color: #F15A24;
 }
 /* RESPONSIVE */
 @media (max-width: 1024px) {
