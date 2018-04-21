@@ -13,7 +13,7 @@
 		</form>
 
 	<?php
-	if (isset($_SESSION['user'])) {
+	if (!isset($_SESSION['user'])) {
 	?>
 		<!-- BOTÓN LOGIN -->
 		<button id="btn-login" class="btn btn-rvs">
@@ -27,7 +27,10 @@
 			<div class="dropdown-content">
 				<a href="#">Editar perfil</a>
 				<a href="#">Editar RSS</a>
-				<a href="#">Salir <i class="material-icons">exit_to_app</i></a>
+				<a href="#">
+					<span style="vertical-align: middle;">Salir</span>
+					<i class="material-icons" style="vertical-align: middle;">exit_to_app</i>
+				</a>
 			</div>
 		</div>
 	<?php
