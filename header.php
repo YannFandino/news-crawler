@@ -1,7 +1,6 @@
-<!-- CABECERA -->
 <header>
 	<!-- LOGO -->
-	<div class="nc-logo"></div>
+	<a href="index.php"><div class="nc-logo"></div></a>
 
 	<div class="nc-right-menu">
 		<!-- BUSCADOR -->
@@ -13,26 +12,28 @@
 		</form>
 
 	<?php
-	if (!isset($_SESSION['user'])) {
+	session_start();
+	if (isset($_SESSION['user'])) {
 	?>
-		<!-- BOTÓN LOGIN -->
-		<button id="btn-login" class="btn btn-rvs">
-			Iniciar Sesión
-		</button>
+        <!-- MENU DROPDOWN -->
+        <div class="dropdown">
+            <i class="material-icons icon-menu">menu</i>
+            <div class="dropdown-content">
+                <a href="#">Editar perfil</a>
+                <a href="#">Editar RSS</a>
+                <a href="controlador.php?action=salir">
+                    <span style="vertical-align: middle;">Salir</span>
+                    <i class="material-icons" style="vertical-align: middle;">exit_to_app</i>
+                </a>
+            </div>
+        </div>
 	<?php
 	} else {
 	?>
-		<div class="dropdown">
-			<i class="material-icons icon-menu">menu</i>
-			<div class="dropdown-content">
-				<a href="#">Editar perfil</a>
-				<a href="#">Editar RSS</a>
-				<a href="#">
-					<span style="vertical-align: middle;">Salir</span>
-					<i class="material-icons" style="vertical-align: middle;">exit_to_app</i>
-				</a>
-			</div>
-		</div>
+        <!-- BOTÓN LOGIN -->
+        <button id="btn-login" class="btn btn-rvs">
+            Iniciar Sesión
+        </button>
 	<?php
 	}
 	?>

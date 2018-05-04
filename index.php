@@ -13,6 +13,9 @@
 	<!-- CABECERA -->
 	<?php
 		require_once('header.php');
+		if (isset($_SESSION['user'])) {
+		    header('Location: xml.php');
+        }
 	?>
 	
 	<!-- CONTENIDO -->
@@ -24,10 +27,12 @@
 		</div>
 		<!-- FORMULARIO REGISTRO -->
 		<div class="hl-form">
-			<form class="registro-form">
-				<input type="text" placeholder="Nombre" />
-				<input type="email" placeholder="Correo electrónico" />
-				<input type="password" placeholder="Contraseña" />
+			<form class="registro-form" id="registro-form" action="controlador.php" method="post" onsubmit="return checkForm(this.id)">
+                <div id="registro-form-error" style="display: none;margin-bottom: 8px;color: red;font-size: .8em;"></div>
+				<input type="text" name="name" placeholder="Nombre" />
+				<input type="email" name="email" placeholder="Correo electrónico" />
+				<input type="password" name="password" placeholder="Contraseña" />
+				<input type="hidden" name="action" value="registro" />
 				<button class="btn btn-nc">Regístrate</button>
 			</form>
 		</div>
@@ -35,44 +40,39 @@
 	
 	<!-- LOGIN -->
 	<section id="modal-login" class="login-modal">
-		<form class="login-form">
+		<form class="login-form" id="login-form" action="controlador.php" method="post" onsubmit="return checkForm(this.id)">
 			<i class="material-icons icon-clear">clear</i>
-			<input type="email" placeholder="Correo electrónico" />
-			<input type="password" placeholder="Contraseña" />
+            <div id="login-form-error" style="display: none;margin-bottom: 8px;color: red;font-size: .8em;"></div>
+			<input type="email" name="email" placeholder="Correo electrónico" />
+			<input type="password" name="password" placeholder="Contraseña" />
+            <input type="hidden" name="action" value="login"/>
 			<button class="btn btn-nc">Iniciar Sesión</button><br>
 			<div>¿No recuerdas tu contraseña?</div>
 		</form>
 	</section>
 	
 </body>
-<script>
-	
-	// Función para mostrar/ocultar el modal de inicio de sesión
-	function showHideModal(id) {
-		var modal = document.getElementById(id);
-		modal.style.transition = "opacity 1s"
-		if (modal.style.opacity == 0) {
-			modal.style.opacity = "1";
-			modal.style.zIndex = "3";
-		} else {
-			modal.style.opacity = "0";
-			setTimeout(function(){
-				modal.style.zIndex = "-1";
-			}, 1000);
+<script src="js/js.js"></script>
+<?php
+	if (isset($_SESSION['error_login'])) {
+		$msg = "";
+		switch($_SESSION['error_login']) {
+			case 'Error1':
+				$msg = "Datos de usuario incorrectos";
+				break;
+			case 'Error2':
+				$msg = "El email no esta registrado";
+				break;
 		}
+?>
+	<script>
+		var modal = document.getElementById('modal-login');
+    	modal.style.opacity = "1";
+        modal.style.zIndex = "2";
+		
+		showError("login-form", "<?php echo $msg; ?>");
+	</script>
+<?php
 	}
-	
-	/* Añadir evento para mostrar y ocultar modal de inicio de sesión
-	   a botones
-	*/
-	var btnLogin = document.getElementById("btn-login");
-	var btnExit = document.getElementsByClassName("icon-clear")[0];
-	btnLogin.addEventListener("click", function() {
-		showHideModal("modal-login");
-	});
-	btnExit.addEventListener("click", function() {
-		showHideModal("modal-login");
-	});
-	
-</script>
+?>
 </html>

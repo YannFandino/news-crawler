@@ -8,7 +8,7 @@ USE newscrawler;
 CREATE TABLE IF NOT EXISTS table_users (
 	id_user VARCHAR(5) NOT NULL,
 	email VARCHAR(100) NOT NULL,
-	password VARCHAR(20) NOT NULL,
+	password VARCHAR(100) NOT NULL,
 	nombre VARCHAR(50) NOT NULL,
 	CONSTRAINT pk_user PRIMARY KEY (id_user),
 	UNIQUE (email)
