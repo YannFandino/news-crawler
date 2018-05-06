@@ -14,7 +14,7 @@
 	<?php
 		require_once('header.php');
 		if (isset($_SESSION['user'])) {
-		    header('Location: xml.php');
+		    header('Location: channel.php');
         }
 	?>
 	

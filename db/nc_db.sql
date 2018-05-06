@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS table_categorias (
 CREATE TABLE IF NOT EXISTS table_rss (
 	id_rss INT NOT NULL AUTO_INCREMENT,
 	descripcion VARCHAR(50) NOT NULL,
-	rss2categoria INT NOT NULL,
+	rss2categoria INT,
 	url VARCHAR(100) NOT NULL,
 	xml VARCHAR(100) NOT NULL,
 	CONSTRAINT pk_rss PRIMARY KEY (id_rss),
