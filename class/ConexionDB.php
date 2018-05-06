@@ -60,13 +60,10 @@ class ConexionDB {
                   VALUES ('$codigo','$email','$password','$nombre');";
     	try {
     		$resultado = @mysqli_query($this->conexion, $query);
-    		echo mysqli_error($this->conexion);
     		if (!$resultado) {
-                $firstName = substr($nombre, 0, strpos($nombre, ' '));
-                $_SESSION["user"] = new User($email, $firstName);
     			throw new Exception;
     		}
-    		return true;
+    		return new User($codigo, $email, $nombre);
     	} catch (Exception $e) {
     		if (mysqli_errno($this->conexion) == 1062) {
     			echo "<div class='error'>El usuario ya existe</div>";
@@ -77,7 +74,11 @@ class ConexionDB {
     	}
     }
 
-    // Metodo para obtener la informacion del usuario - Login
+    /** Metodo para obtener la informacion del usuario - Login
+     * @param $email
+     * @param $password
+     * @return string|User
+     */
     public function loginUser($email, $password) {
         $query = "SELECT * FROM table_users
                   WHERE email = '$email';";
@@ -86,7 +87,7 @@ class ConexionDB {
             $fila = mysqli_fetch_assoc($resultado);
             if (mysqli_num_rows($resultado)) {
                 if (password_verify($password, $fila["password"])) {
-                    return new User($email, $nombre);
+                    return new User($fila["id_user"], $email, $fila["nombre"]);
                 } else {
                     throw new Exception("Error1");
                 }
@@ -98,21 +99,61 @@ class ConexionDB {
         }
     }
 
-    function setRSS($user_id) {
-        $query = "SELECT r.* FROM table_user_feed uf, table_rss r
-                  WHERE uf.	userfeed2user = '$user_id'
-                  AND uf.	userfeed2rss = r.id_rss;";
+    /** Metodo para obtener los canales guardados de un usuario
+     * @param $user_id
+     * @return array|null
+     */
+    public function getRSS($user_id) {
+        $query = "SELECT r.xml FROM table_user_feed uf, table_rss r
+                  WHERE uf.userfeed2user = '$user_id'
+                  AND uf.userfeed2rss = r.id_rss;";
 
         try {
             $resultado = mysqli_query($this->conexion, $query);
             if (mysqli_num_rows($resultado)) {
-                return mysqli_fetch_array();
+                $lista = array();
+                while ($row=mysqli_fetch_assoc($resultado)) {
+                    array_push($lista,$row['xml']);
+                }
+                return $lista;
             }
         } catch (Exception $e) {
-
+            return null;
         }
     }
 
+    /** Obtener url del archivo xml de un canal RSS
+     * @param $descripcion
+     * @return array|null
+     */
+    public function getRssUrl($descripcion){
+        $query = "SELECT r.xml FROM table_rss r
+                  WHERE UPPER(r.descripcion) = '".strtoupper($descripcion)."';";
+
+        try {
+            $resultado = mysqli_query($this->conexion, $query);
+            if (mysqli_num_rows($resultado)) {
+                $fila = mysqli_fetch_array($resultado);
+                return $fila['xml'];
+            }
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+
+    public function getChannels() {
+        $query = "SELECT r.xml FROM table_rss r;";
+
+        try {
+            $resultado = mysqli_query($this->conexion, $query);
+            if (mysqli_num_rows($resultado)) {
+                return $resultado;
+            }
+        } catch (Exception $e) {
+            return null;
+        }
+    }
     /**
      * Generar codigo de 5 caracteres
      * @return string
