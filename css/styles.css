@@ -1,6 +1,5 @@
 * {
 	padding: 0; margin: 0; font-family: 'Montserrat', sans-serif;
-	
 }
 html, body {
 	height: 100%;
@@ -257,7 +256,6 @@ header {
 	position: absolute;
 	bottom: 0;
 }
-
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
